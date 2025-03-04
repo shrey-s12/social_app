@@ -23,7 +23,7 @@ const Home = () => {
                     onClick={() => openModal()}
                     className="fixed top-20 right-6 bg-green-600 text-white p-3 rounded-full shadow-lg hover:bg-green-700 transition"
                 >
-                    Create Post
+                    ➕ Create Post
                 </button>
     
                 <PostList openModal={openModal} />
