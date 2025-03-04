@@ -1,13 +1,12 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-export const loadPosts = createAsyncThunk("posts/loadPosts", async () => {
+const getInitialPosts = () => {
   const storedPosts = localStorage.getItem("posts");
   return storedPosts ? JSON.parse(storedPosts) : [];
-});
+};
 
 const initialState = {
-  posts: [],
-  isLoading: false,
+  posts: getInitialPosts(),
 };
 
 const postSlice = createSlice({
@@ -24,22 +23,9 @@ const postSlice = createSlice({
       if (post) {
         post.text = text;
         post.image = image;
-        localStorage.setItem("posts", JSON.stringify(state.posts)); // Update localStorage
+        localStorage.setItem("posts", JSON.stringify(state.posts));
       }
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(loadPosts.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(loadPosts.fulfilled, (state, action) => {
-        state.posts = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(loadPosts.rejected, (state) => {
-        state.isLoading = false;
-      });
   },
 });
 
