@@ -13,22 +13,28 @@ const Home = () => {
     };
 
     return (
-        <div className="p-6">
-            <h2 className="text-center text-2xl font-bold my-4">Home Feed</h2>
-            <button
-                onClick={() => openModal()}
-                className="bg-green-600 text-white px-4 py-2 rounded-md"
-            >
-                + Create Post
-            </button>
-
-            <PostList openModal={openModal} />
-
+        <div className="bg-gray-200 min-h-screen">
+            <header className="bg-blue-500 text-white text-center py-4 shadow-md">
+                <h2 className="text-3xl font-bold">Social Feed</h2>
+            </header>
+    
+            <div className=" mt-6 p-4">
+                <button
+                    onClick={() => openModal()}
+                    className="fixed top-20 right-6 bg-green-600 text-white p-3 rounded-full shadow-lg hover:bg-green-700 transition"
+                >
+                    Create Post
+                </button>
+    
+                <PostList openModal={openModal} />
+            </div>
+    
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <PostForm post={selectedPost} onClose={() => setIsModalOpen(false)} />
             </Modal>
         </div>
     );
+    
 };
 
 export default Home;
