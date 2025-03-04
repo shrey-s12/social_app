@@ -30,3 +30,6 @@ npm install
 ```bash
 npm run dev
 ```
+
+## 🌍 Live Demo
+Check out the deployed app: [Social App](https://social-app-brown-one.vercel.app/)
