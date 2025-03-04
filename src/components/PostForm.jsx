@@ -1,62 +1,46 @@
-import React, { useState } from 'react'
-import { v4 as uuidv4 } from "uuid";
-import { addPost } from '../slices/postsSlice';
-import { useDispatch } from 'react-redux';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addPost, editPost } from "../slices/postSlice";
+import { useNavigate } from "react-router-dom";
 
-const PostForm = () => {
+const PostForm = ({ post = {} }) => {
+    const [text, setText] = useState(post.text || "");
+    const [image, setImage] = useState(post.image || "");
     const dispatch = useDispatch();
-    const [image, setImage] = useState("");
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (image.trim() === "" || title.trim() === "" || content.trim() === "") {
-            return;
+        if (post.id) {
+            dispatch(editPost({ id: post.id, text, image }));
+        } else {
+            dispatch(addPost({ id: Date.now(), text, image }));
         }
-
-        const newPost = {
-            id: uuidv4(),
-            image,
-            title,
-            content
-        };
-        dispatch(addPost(newPost));
-        setImage("");
-        setTitle("");
-        setContent("");
-    }
+        navigate("/");
+    };
 
     return (
-        <form onSubmit={handleSubmit} className="p-4 border rounded-md flex flex-col gap-3">
-            <input
-                type="url"
-                placeholder="Image URL"
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
-                className="p-2 border rounded-md"
+        <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white p-6 shadow-md rounded-md">
+            <textarea
+                className="w-full border p-2 rounded-md mb-2"
+                placeholder="What's on your mind?"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                required
             />
             <input
                 type="text"
-                placeholder="Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="p-2 border rounded-md"
+                className="w-full border p-2 rounded-md mb-2"
+                placeholder="Image URL"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+                required
             />
-            <textarea
-                placeholder="Content"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                className="p-2 border rounded-md"
-            />
-            <button
-                type="submit"
-                className="bg-blue-500 text-white p-2 rounded-md"
-            >
-                Add Post
+            <button className="bg-blue-600 text-white px-4 py-2 rounded-md w-full">
+                {post.id ? "Update Post" : "Create Post"}
             </button>
         </form>
-    )
-}
+    );
+};
 
-export default PostForm
+export default PostForm;
