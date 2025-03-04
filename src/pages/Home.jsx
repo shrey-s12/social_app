@@ -13,11 +13,11 @@ const Home = () => {
     };
 
     return (
-        <div className="bg-gray-200 min-h-screen">
+        <div className="min-h-screen bg-gradient-to-r from-blue-300 to-blue-200">
             <header className="bg-blue-500 text-white text-center py-4 shadow-md">
                 <h2 className="text-3xl font-bold">Social Feed</h2>
             </header>
-    
+
             <div className=" mt-6 p-4">
                 <button
                     onClick={() => openModal()}
@@ -25,16 +25,16 @@ const Home = () => {
                 >
                     ➕ Create Post
                 </button>
-    
+
                 <PostList openModal={openModal} />
             </div>
-    
+
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <PostForm post={selectedPost} onClose={() => setIsModalOpen(false)} />
             </Modal>
         </div>
     );
-    
+
 };
 
 export default Home;
