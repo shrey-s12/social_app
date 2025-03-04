@@ -21,12 +21,12 @@ git clone https://github.com/shrey-s12/social_app.git
 cd social_app
 ```
 
-### 1️⃣ Install the Dependencies
+### 2️⃣ Install the Dependencies
 ```bash
 npm install
 ```
 
-### 1️⃣ Run the App
+### 3️⃣ Run the App
 ```bash
 npm run dev
 ```
