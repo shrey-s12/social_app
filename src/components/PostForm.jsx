@@ -1,19 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addPost, editPost } from "../slices/postSlice";
 
 const PostForm = ({ post, onClose }) => {
     const dispatch = useDispatch();
 
-    const [text, setText] = useState("");
-    const [image, setImage] = useState("");
-
-    useEffect(() => {
-        if (post) {
-            setText(post.text);
-            setImage(post.image);
-        }
-    }, [post]);
+    const [text, setText] = useState(post?.text || "");
+    const [image, setImage] = useState(post?.image || "");
 
     const handleSubmit = (e) => {
         e.preventDefault();
