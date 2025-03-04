@@ -1,12 +1,32 @@
-# React + Vite
+# 📰 Social App (React + Redux)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple social media application where users can **create, read, update, and delete (CRUD) posts**. The posts are stored in **localStorage** for persistence.
 
-Currently, two official plugins are available:
+## 📌 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+✅ **Create, Edit, and Delete Posts**  
+✅ **Posts stored in LocalStorage for persistence**  
+✅ **State Management with Redux Toolkit**  
+✅ **Modal for Adding & Editing Posts**  
+✅ **Responsive UI with Tailwind CSS**  
+✅ **Uses React Icons for actions**  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Getting Started
+
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/shrey-s12/social_app.git
+cd social_app
+```
+
+### 1️⃣ Install the Dependencies
+```bash
+npm install
+```
+
+### 1️⃣ Run the App
+```bash
+npm run dev
+```
