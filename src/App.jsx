@@ -1,15 +1,22 @@
-import PostForm from "./components/PostForm"
-import PostList from "./components/PostList"
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import CreatePost from "./pages/CreatePost";
+import EditPost from "./pages/EditPost";
 
-function App() {
 
+const App = () => {
   return (
-    <div className="max-w-xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Social App</h1>
-      <PostForm />
-      <PostList />
-    </div>
-  )
-}
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/create" element={<CreatePost />} />
+        <Route path="/edit/:id" element={<EditPost />} />
+      </Routes>
+    </>
+  );
+};
 
-export default App
+export default App;
