@@ -1,28 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addPost, editPost } from "../slices/postSlice";
-import { useNavigate } from "react-router-dom";
 
-const PostForm = ({ post = {} }) => {
-    const [text, setText] = useState(post.text || "");
-    const [image, setImage] = useState(post.image || "");
+const PostForm = ({ post, onClose }) => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+
+    const [text, setText] = useState("");
+    const [image, setImage] = useState("");
+
+    useEffect(() => {
+        if (post) {
+            setText(post.text);
+            setImage(post.image);
+        }
+    }, [post]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (post.id) {
+
+        if (post) {
             dispatch(editPost({ id: post.id, text, image }));
         } else {
             dispatch(addPost({ id: Date.now(), text, image }));
         }
-        navigate("/");
+
+        onClose();
     };
 
     return (
-        <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white p-6 shadow-md rounded-md">
+        <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
             <textarea
-                className="w-full border p-2 rounded-md mb-2"
+                className="w-full border p-2 rounded-md"
                 placeholder="What's on your mind?"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
@@ -30,14 +38,13 @@ const PostForm = ({ post = {} }) => {
             />
             <input
                 type="text"
-                className="w-full border p-2 rounded-md mb-2"
-                placeholder="Image URL"
+                className="w-full border p-2 rounded-md"
+                placeholder="Image URL (optional)"
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
-                required
             />
             <button className="bg-blue-600 text-white px-4 py-2 rounded-md w-full">
-                {post.id ? "Update Post" : "Create Post"}
+                {post ? "Update Post" : "Create Post"}
             </button>
         </form>
     );
