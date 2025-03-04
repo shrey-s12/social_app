@@ -26,8 +26,13 @@ const postSlice = createSlice({
         localStorage.setItem("posts", JSON.stringify(state.posts));
       }
     },
+    deletePost: (state, action) => {
+      const { id } = action.payload;
+      state.posts = state.posts.filter((post) => post.id !== id);
+      localStorage.setItem("posts", JSON.stringify(state.posts));
+    },
   },
 });
 
-export const { addPost, editPost } = postSlice.actions;
+export const { addPost, editPost, deletePost } = postSlice.actions;
 export default postSlice.reducer;
